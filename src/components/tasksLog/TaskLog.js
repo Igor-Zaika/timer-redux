@@ -10,7 +10,7 @@ import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import { deepPurple, grey, lightBlue } from '@mui/material/colors';
 import { useDispatch, useSelector} from 'react-redux';
-// import { useEffect } from 'react';
+
 
 import {deleteLog} from '../../actions/index';
 

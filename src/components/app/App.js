@@ -10,6 +10,7 @@ import Page404 from '../pages/404';
 
 function App() {
 
+
   	return (
 		<Router>
 			<Routes>

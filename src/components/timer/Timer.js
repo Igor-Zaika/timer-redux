@@ -1,7 +1,6 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { v4 as uuidv4 } from 'uuid';
-
 import { startTimer, stopTimer, addNewTask, onActiveModal, clearName, createLog } from '../../actions/index';
 
 import './timer.scss'
@@ -26,26 +25,25 @@ const Timer = () => {
         return `${hours < 10 ? '0': ''}${hours}:${minutes < 10 ? '0': ''}${minutes}:${seconds < 10 ? '0': ''}${seconds}`
     }
 
-    const saveStartTimer = () => {
+    const getStartTimer = () => {
         if(!localStorage.getItem('timerStart'))  {
             localStorage.setItem('timerStart', Date.now())
             dispatch(startTimer());
         } else {
             dispatch(startTimer());
-            console.log('timer')
         }
     }
   
-    const saveFinishedDate = () => {
+    const getFinishedDate = () => {
         const startTime = +localStorage.getItem('timerStart');
         const  endTime = Date.now();
 
-        let dataTable = JSON.parse(localStorage.getItem("allData"));
-        if(dataTable === null) dataTable = [];
+        let tasksLogTable = JSON.parse(localStorage.getItem("tasksLog"));
+        if(tasksLogTable === null) tasksLogTable = [];
 
-        const newCreateDataTable = () => {
+        const сreateNewTasksTable = () => {
             const newData = {
-                // id: dataTable.length + 1,
+                day: new Date().getDate(),
                 id: uuidv4(),
                 name: nameTask,
                 start: calcSpendTime(startTime + 3 * 60 * 60 * 1000),
@@ -54,15 +52,15 @@ const Timer = () => {
             }
             return newData;
         }
-        dataTable.push(newCreateDataTable());
-        localStorage.setItem("allData", JSON.stringify(dataTable));
+        tasksLogTable.push(сreateNewTasksTable());
+        localStorage.setItem("tasksLog", JSON.stringify(tasksLogTable));
         dispatch(createLog());
     }
  
     const onStopTimer = () => {
         if(nameTask) {
             dispatch(stopTimer());
-            saveFinishedDate();
+            getFinishedDate();
             dispatch(clearName());
             localStorage.removeItem('timerStart');
         } else {
@@ -82,7 +80,7 @@ const Timer = () => {
             <div className="timer">
                 {calcSpendTime(time)}
             </div>
-            {!timerActive ? <button className='button' onClick={() => saveStartTimer()}>START</button> : ''}
+            {!timerActive ? <button className='button' onClick={() => getStartTimer()}>START</button> : ''}
             {timerActive ? <button className='button' onClick={() => onStopTimer()}>STOP</button> : ''}
         </>
     )

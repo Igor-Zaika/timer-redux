@@ -41,18 +41,6 @@ export const clearName = () => {
     }
 }
 
-export const showActiveLog = () => {
-    return {
-        type: 'SHOW_ACTIVE_LOG'
-    }
-}
-
-export const showActiveChart = () => {
-    return {
-        type: 'SHOW_ACTIVE_CHART'
-    }
-}
-
 export const createLog = () => {
     return {
         type: 'CREATE_LOG',

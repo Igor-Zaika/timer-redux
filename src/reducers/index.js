@@ -2,10 +2,9 @@
 const initialState = {
     nameTask: '',
     modal: false,
-    activeLine: '',
     time: Math.floor(Date.now() - localStorage.getItem('timerStart')),
     timerActive: false,
-    dataTable: JSON.parse(localStorage.getItem('allData'))
+    tasks: JSON.parse(localStorage.getItem('tasksLog'))
 }
 
 const reducer = (state = initialState, action) => {
@@ -48,25 +47,15 @@ const reducer = (state = initialState, action) => {
                 ...state,
                 nameTask: ''
             };    
-        case 'SHOW_ACTIVE_LOG':
-            return {
-                ...state,
-                activeLine: 'log'
-            }  
-        case 'SHOW_ACTIVE_CHART':
-            return {
-                ...state,
-                activeLine: 'chart'
-            } 
         case 'CREATE_LOG':
             return {
                 ...state,
-                dataTable: JSON.parse(localStorage.getItem('allData')),
+                tasks: JSON.parse(localStorage.getItem('tasksLog')),
             }
         case 'DELETE_LOG':
             return {
                 ...state,
-                dataTable: JSON.parse(localStorage.getItem('allData'))
+                tasks: JSON.parse(localStorage.getItem('tasksLog'))
             };
         default: return state
     }

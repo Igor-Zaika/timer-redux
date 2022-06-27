@@ -28,41 +28,41 @@
     margin: 0 auto; 
     line-height: 30px;
 }
-.line_log {
-    border: none;
-    position: absolute;
-    width: 535px;
-    top: 21px;
-    background-color: $pink;
-    height: 1px;
-    opacity: 0;
-    &-active {
-        border: none;
-        position: absolute;
-        width: 535px;
-        top: 21px;
-        background-color: $pink;
-        height: 1px;
-        opacity: 1;
-    }
-}
-.line_chart {
-    border: none;
-    position: absolute;
-    width: 535px;
-    top: 21px;
-    left: 535px;
-    background-color: $pink;
-    height: 1px;
-    opacity: 0;
-    &-active {
-        border: none;
-        position: absolute;
-        width: 535px;
-        top: 21px;
-        left: 535px;
-        background-color: $pink;
-        height: 1px;
-        opacity: 1;
-    }
-}
+// .line_log {
+//     border: none;
+//     position: absolute;
+//     width: 535px;
+//     top: 21px;
+//     background-color: $pink;
+//     height: 1px;
+//     opacity: 0;
+//     &-active {
+//         border: none;
+//         position: absolute;
+//         width: 535px;
+//         top: 21px;
+//         background-color: $pink;
+//         height: 1px;
+//         opacity: 1;
+//     }
+// }
+// .line_chart {
+//     border: none;
+//     position: absolute;
+//     width: 535px;
+//     top: 21px;
+//     left: 535px;
+//     background-color: $pink;
+//     height: 1px;
+//     opacity: 0;
+//     &-active {
+//         border: none;
+//         position: absolute;
+//         width: 535px;
+//         top: 21px;
+//         left: 535px;
+//         background-color: $pink;
+//         height: 1px;
+//         opacity: 1;
+//     }
+// }

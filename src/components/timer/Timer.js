@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { v4 as uuidv4 } from 'uuid';
-import { startTimer, stopTimer, addNewTask, onActiveModal, clearName, createLog } from '../../actions/index';
+import { startTimer, stopTimer, addNewTask, onActiveModal, clearName, setTusks } from '../../actions/index';
 
 import './timer.scss'
 
@@ -18,7 +18,7 @@ const Timer = () => {
         // eslint-disable-next-line
     }, []);
 
-    const calcSpendTime = (mlsec) => {
+    const calcTime = (mlsec) => {
         let seconds = Math.floor( (mlsec/1000) % 60 );
         let minutes = Math.floor( (mlsec/1000/60) % 60 );
         let hours = Math.floor( (mlsec/(1000*60*60) % 24));
@@ -46,15 +46,15 @@ const Timer = () => {
                 day: new Date().getDate(),
                 id: uuidv4(),
                 name: nameTask,
-                start: calcSpendTime(startTime + 3 * 60 * 60 * 1000),
-                end: calcSpendTime(endTime + 3 * 60 * 60 * 1000),
-                spend: calcSpendTime(endTime - startTime),
+                start: calcTime(startTime + 3 * 60 * 60 * 1000),
+                end: calcTime(endTime + 3 * 60 * 60 * 1000),
+                spend: calcTime(endTime - startTime),
             }
             return newData;
         }
         tasksLogTable.push(сreateNewTasksTable());
         localStorage.setItem("tasksLog", JSON.stringify(tasksLogTable));
-        dispatch(createLog());
+        dispatch(setTusks(JSON.parse(localStorage.getItem('tasksLog'))));
     }
  
     const onStopTimer = () => {
@@ -78,7 +78,7 @@ const Timer = () => {
             </input>
             <div className="circle"></div>
             <div className="timer">
-                {calcSpendTime(time)}
+                {calcTime(time)}
             </div>
             {!timerActive ? <button className='button' onClick={() => getStartTimer()}>START</button> : ''}
             {timerActive ? <button className='button' onClick={() => onStopTimer()}>STOP</button> : ''}

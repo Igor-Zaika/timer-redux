@@ -1,5 +1,5 @@
 import { put, call, take, fork, cancel } from 'redux-saga/effects';
-import {startTimer, stopTimer, increaseTimer } from '../actions/index'
+import {startTimer, stopTimer, increaseTimer, setTusks } from '../actions/index'
 
 
 const delay = (ms) => new Promise(res => setTimeout(res, ms));

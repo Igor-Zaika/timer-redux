@@ -4,7 +4,7 @@ const initialState = {
     modal: false,
     time: Math.floor(Date.now() - localStorage.getItem('timerStart')),
     timerActive: false,
-    tasks: JSON.parse(localStorage.getItem('tasksLog'))
+    tasks: []
 }
 
 const reducer = (state = initialState, action) => {
@@ -47,15 +47,10 @@ const reducer = (state = initialState, action) => {
                 ...state,
                 nameTask: ''
             };    
-        case 'CREATE_LOG':
+        case 'SET_TASKS':
             return {
                 ...state,
-                tasks: JSON.parse(localStorage.getItem('tasksLog')),
-            }
-        case 'DELETE_LOG':
-            return {
-                ...state,
-                tasks: JSON.parse(localStorage.getItem('tasksLog'))
+                tasks: action.payload
             };
         default: return state
     }

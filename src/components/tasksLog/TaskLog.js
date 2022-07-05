@@ -11,7 +11,8 @@ import Paper from '@mui/material/Paper';
 import { deepPurple, grey, lightBlue } from '@mui/material/colors';
 import { useDispatch, useSelector} from 'react-redux';
 
-import {deleteLog} from '../../actions/index';
+import {setTusks} from '../../actions/index';
+
 
 import './taskLog.scss'
 
@@ -19,9 +20,11 @@ const StyledTableCell = styled(TableCell)(({ theme }) => ({
 	
 	[`&.${tableCellClasses.head}`]: {
 	  color: grey[500],
+	  fontSize: 20
 	},
 	[`&.${tableCellClasses.body}`]: {
 		color: deepPurple[900],
+		fontSize: 20
 	},
 }));
 
@@ -36,8 +39,7 @@ function createData(id, task, timeStart, timeEnd, timeSpend, info, remove) {
 }
 
 
-
-const TaskLogTable = () => {
+const TaskLog = () => {
 	const {tasks} = useSelector(state => state);
 	const dispatch = useDispatch();
 	const tasksLogTable = JSON.parse(localStorage.getItem('tasksLog'));
@@ -49,14 +51,16 @@ const TaskLogTable = () => {
 			}
 		})
 		localStorage.setItem('tasksLog', JSON.stringify(tasksLogTable));
-		dispatch(deleteLog());
+		dispatch(setTusks(JSON.parse(localStorage.getItem('tasksLog'))));
 	}
 
 	const countTableLog = () => {
 		let rows = [];
+
 		for(let i = 0; i < tasks.length; i++) {
 			rows.push(createData(tasks[i].id, tasks[i].name, tasks[i].start, tasks[i].end, tasks[i].spend, 'INFO', 'DELETE'));
 		}
+
 		return rows;
 	}
 
@@ -70,11 +74,11 @@ const TaskLogTable = () => {
 					<TableHead>
 						<TableRow>
 							<StyledTableCell align="center">№</StyledTableCell>
-							<StyledTableCell align="right">Task</StyledTableCell>
-							<StyledTableCell align="right">Time start</StyledTableCell>
-							<StyledTableCell align="right">Time end</StyledTableCell>
-							<StyledTableCell align="right">Time spend</StyledTableCell>
-							<StyledTableCell align="right" >Info</StyledTableCell>
+							<StyledTableCell align="center">Task</StyledTableCell>
+							<StyledTableCell align="center">Time start</StyledTableCell>
+							<StyledTableCell align="center">Time end</StyledTableCell>
+							<StyledTableCell align="center">Time spend</StyledTableCell>
+							<StyledTableCell align="center" >Info</StyledTableCell>
 							<StyledTableCell align="center">Delete</StyledTableCell>
 						</TableRow>
 					</TableHead>
@@ -86,11 +90,11 @@ const TaskLogTable = () => {
 								<StyledTableCell align="center" component="th" scope="row" color='palette.secondary.dark'>
 									{i + 1}
 								</StyledTableCell>
-								<StyledTableCell align="right">{row.task}</StyledTableCell>
-								<StyledTableCell align="right">{row.timeStart}</StyledTableCell>
-								<StyledTableCell align="right">{row.timeEnd}</StyledTableCell>
-								<StyledTableCell align="right">{row.timeSpend}</StyledTableCell>
-								<StyledTableCell align="right" ><Link to={`/tableLog/${row.id}`}><button>{row.info}</button></Link></StyledTableCell>
+								<StyledTableCell align="center">{row.task}</StyledTableCell>
+								<StyledTableCell align="center">{row.timeStart}</StyledTableCell>
+								<StyledTableCell align="center">{row.timeEnd}</StyledTableCell>
+								<StyledTableCell align="center">{row.timeSpend}</StyledTableCell>
+								<StyledTableCell align="center" ><Link to={`/${row.id}`}><button>{row.info}</button></Link></StyledTableCell>
 								<StyledTableCell align="center" onClick={() => onDeleteLog(row.id)}><button>{row.remove}</button></StyledTableCell>
 							</StyledTableRow>
 						))}
@@ -101,4 +105,4 @@ const TaskLogTable = () => {
 	)
 }
 
-export default TaskLogTable;
+export default TaskLog;

@@ -4,13 +4,14 @@ button {
     border: none;
     background-color: white;
     color: #311b92;
+    font-size: 20px;
     cursor: pointer;
 }
 .line-log {
     margin-top: 0;
     margin-left: 0;
     border: none;
-    width: 535px;
+    width: 50%;
     background-color: $pink;
-    height: 1px;
+    height: 2px;
 }

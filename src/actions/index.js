@@ -41,16 +41,9 @@ export const clearName = () => {
     }
 }
 
-export const createLog = () => {
+export const setTusks = (tasks) => {
     return {
-        type: 'CREATE_LOG',
+        type: 'SET_TASKS',
+        payload: tasks
     }
 }
-
-export const deleteLog = () => {
-    return {
-        type: 'DELETE_LOG',
-    }
-}
-
-

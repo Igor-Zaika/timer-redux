@@ -1,8 +1,9 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { v4 as uuidv4 } from 'uuid';
-import { startTimer, stopTimer, addNewTask, onActiveModal, clearName, setTusks } from '../../actions/index';
+import { startTimer, stopTimer, addNewTask, onActiveModal, clearName, setTusks, addSpentTime } from '../../actions/index';
 
+import {calcTime} from '../../func'
 import './timer.scss'
 
 const Timer = () => {
@@ -18,13 +19,6 @@ const Timer = () => {
         // eslint-disable-next-line
     }, []);
 
-    const calcTime = (mlsec) => {
-        let seconds = Math.floor( (mlsec/1000) % 60 );
-        let minutes = Math.floor( (mlsec/1000/60) % 60 );
-        let hours = Math.floor( (mlsec/(1000*60*60) % 24));
-        return `${hours < 10 ? '0': ''}${hours}:${minutes < 10 ? '0': ''}${minutes}:${seconds < 10 ? '0': ''}${seconds}`
-    }
-
     const getStartTimer = () => {
         if(!localStorage.getItem('timerStart'))  {
             localStorage.setItem('timerStart', Date.now())
@@ -34,7 +28,7 @@ const Timer = () => {
         }
     }
   
-    const getFinishedDate = () => {
+    const addNewTasks = () => {
         const startTime = +localStorage.getItem('timerStart');
         const  endTime = Date.now();
 
@@ -52,6 +46,7 @@ const Timer = () => {
             }
             return newData;
         }
+
         tasksLogTable.push(сreateNewTasksTable());
         localStorage.setItem("tasksLog", JSON.stringify(tasksLogTable));
         dispatch(setTusks(JSON.parse(localStorage.getItem('tasksLog'))));
@@ -60,7 +55,7 @@ const Timer = () => {
     const onStopTimer = () => {
         if(nameTask) {
             dispatch(stopTimer());
-            getFinishedDate();
+            addNewTasks();
             dispatch(clearName());
             localStorage.removeItem('timerStart');
         } else {

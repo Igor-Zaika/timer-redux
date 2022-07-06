@@ -47,3 +47,10 @@ export const setTusks = (tasks) => {
         payload: tasks
     }
 }
+
+export const addSpentTime = (time) => {
+    return {
+        type: 'ADD_SPEND_TIME',
+        payload: time
+    }
+}

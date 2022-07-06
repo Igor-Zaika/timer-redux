@@ -52,6 +52,12 @@ const reducer = (state = initialState, action) => {
                 ...state,
                 tasks: action.payload
             };
+        case 'ADD_SPEND_TIME':
+            const newTasks = [...state.tasks, action.payload]
+            return {
+                ...state,
+                tasks: newTasks
+            };
         default: return state
     }
 }

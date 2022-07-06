@@ -4,10 +4,8 @@ import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, Responsive
 
 import { useSelector, useDispatch } from "react-redux";
 import { setTusks } from "../../actions";
-
+import { calcTime, getRandom } from '../../func';
 import './taskChart.scss'; 
-
-
 
 const TasksChart = () => {
 	const { tasks } = useSelector(state => state);
@@ -33,67 +31,35 @@ const TasksChart = () => {
 		} else if (dayOfToday === day) {
 			for (let i = startHours; i <= endHours; i++) {
 				if (startHours === endHours) {
-					data[i]['Minutes in this hours'] += endMinutes - startMinutes
+					data[i]['Minutes in this hours'] += (endMinutes - startMinutes)
 				} else if (i === startHours) {
-					data[i]['Minutes in this hours'] = 60 - startMinutes
+					data[i]['Minutes in this hours'] = (60 - startMinutes)
 				} else if (i === endHours) {
 					data[i]['Minutes in this hours'] = endMinutes
 				} else {
 					data[i]['Minutes in this hours'] = data[i]['Minutes in this hours'] + 60
 				}
-				
 			}
 		}
 	})
 
 	const getGenerateTasks = () => {
-
-		const calcTime = (mlsec) => {
-			let seconds = Math.floor( (mlsec/1000) % 60 );
-			let minutes = Math.floor( (mlsec/1000/60) % 60 );
-			let hours = Math.floor( (mlsec/(1000*60*60) % 24));
-			return `${hours < 10 ? '0': ''}${hours}:${minutes < 10 ? '0': ''}${minutes}:${seconds < 10 ? '0': ''}${seconds}`
-		}
-	
-		const getRandom = (min, max) =>  {
-			return Math.floor(Math.random() * (max - min)) + min
-		}
-		
 		const randomNumberTasks = getRandom(10, 15)
-	
-		const getRandomNumbers = () => {
-			const result = [];
-			while (result.length <= randomNumberTasks) {
-				const randomHourStart = getRandom(0, 23);
-
-		
-				if (result.indexOf(randomHourStart) === -1) {
-					result.push(randomHourStart)
-				}
-			}
-			return result;
-		};
-	
-		const result = getRandomNumbers();
-		result.sort((a, b) => { return a - b; });
-
+		let startPoint = Date.now();
 		const generatedTasks = [];
 
-		result.forEach(hour => {
-			const randomHourStart = hour * 3600000;
-			const randomMinutStart = Math.floor(getRandom(0,3600000));
-			const hourStart = randomHourStart + randomMinutStart;
-			const durationOfTime = Math.floor(getRandom(600000,5400000));
-			const randomHourEnd = hourStart + durationOfTime;
+		for(let i = 0; i < randomNumberTasks; i++) {
+			const timeBreaking = getRandom(60000,5000000)
+			const durationOfTime = getRandom(600000,5400000);
+			const generetedTime = startPoint + durationOfTime
 
-			generatedTasks.push({day: new Date().getDate(), id: uuidv4(), name: 'lorem', start: calcTime(hourStart), end: calcTime(randomHourEnd), spend: calcTime(randomHourEnd - hourStart)})
-		})
-	
+			generatedTasks.push({day: new Date().getDate(), id: uuidv4(), name: 'lorem', start: calcTime(startPoint), end: calcTime(generetedTime), spend: calcTime(durationOfTime)})
+			
+			startPoint += durationOfTime + timeBreaking
+		}
 		localStorage.setItem('tasksLog',JSON.stringify(generatedTasks));
 		dispatch(setTusks(generatedTasks));
-		
 	}
-
 
 	return (
 		<>
@@ -112,7 +78,7 @@ const TasksChart = () => {
 				</BarChart>
 			</ResponsiveContainer>	
 			<button 
-				style={{backgroundColor: "red", color: "white", marginLeft: '92%'}}
+				style={{backgroundColor: "red", color: "white", marginLeft: '80%'}}
 				onClick={() => getGenerateTasks()}>GENERATE</button>
 		</>
   	);

@@ -10,9 +10,9 @@ import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import { deepPurple, grey, lightBlue } from '@mui/material/colors';
 import { useDispatch, useSelector} from 'react-redux';
+import { useEffect } from "react";
 
 import {setTusks} from '../../actions/index';
-
 
 import './taskLog.scss'
 
@@ -43,6 +43,19 @@ const TaskLog = () => {
 	const {tasks} = useSelector(state => state);
 	const dispatch = useDispatch();
 	const tasksLogTable = JSON.parse(localStorage.getItem('tasksLog'));
+
+	useEffect(() => {
+		try {
+			if(tasksLogTable.length > 0) {
+				dispatch(setTusks(tasksLogTable))
+			}else {
+				console.log('No tasks found');
+			}
+		}catch(e) {
+			console.log('Failed to parse tasks', e);
+		}
+		// eslint-disable-next-line
+	}, [])
 
 	const onDeleteLog = (id) => {
 		tasksLogTable.forEach((item, i) => {

@@ -1,13 +1,22 @@
-
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect } from "react";
 import { Link, useParams  } from "react-router-dom"
 
 import Page404 from '../pages/404'
+import { setTusks } from '../../actions/index'
 import './singleTask.scss';
 
 const SingleTask = () => {
+    const { tasks } = useSelector(state => state);
+    const dispatch = useDispatch();
     const taskId = useParams()
 
-    const tasks = JSON.parse(localStorage.getItem("tasksLog")); 
+    useEffect(() => {
+        const tasksLog = JSON.parse(localStorage.getItem("tasksLog")); 
+        dispatch(setTusks(tasksLog))
+		// eslint-disable-next-line
+	}, [])
+    
     const singleTask = tasks.filter(item => item.id === taskId.taskId);
 
     const View = () => {

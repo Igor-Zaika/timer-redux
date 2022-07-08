@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { v4 as uuidv4 } from 'uuid';
-import { startTimer, stopTimer, addNewTask, onActiveModal, clearName, setTusks, addSpentTime } from '../../actions/index';
+import { startTimer, stopTimer, addNewTask, onActiveModal, clearName, setTusks } from '../../actions/index';
 
 import {calcTime} from '../../func'
 import './timer.scss'
@@ -40,17 +40,30 @@ const Timer = () => {
                 day: new Date().getDate(),
                 id: uuidv4(),
                 name: nameTask,
-                start: calcTime(startTime + 3 * 60 * 60 * 1000),
-                end: calcTime(endTime + 3 * 60 * 60 * 1000),
-                spend: calcTime(endTime - startTime),
+                start: startTime + 3 * 60 * 60 * 1000,
+                end: endTime + 3 * 60 * 60 * 1000,
+                // spend: calcTime(endTime - startTime),
             }
             return newData;
         }
 
         tasksLogTable.push(сreateNewTasksTable());
         localStorage.setItem("tasksLog", JSON.stringify(tasksLogTable));
-        dispatch(setTusks(JSON.parse(localStorage.getItem('tasksLog'))));
+
+        // const setTusks = tasksLogTable.map(task => {
+        //     return {
+        //         day: task.day,
+        //         id: task.id,
+        //         name: task.name,
+        //         start: calcTime(task.start),
+        //         end: calcTime(task.end),
+        //         spend: calcTime(task.end - task.start),
+        //     }
+        // })
+        dispatch(setTusks(tasksLogTable));
     }
+
+    
  
     const onStopTimer = () => {
         if(nameTask) {

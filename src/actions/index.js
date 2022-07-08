@@ -41,16 +41,16 @@ export const clearName = () => {
     }
 }
 
-export const setTusks = (tasks) => {
+export const setTusks = (arr) => {
     return {
         type: 'SET_TASKS',
-        payload: tasks
+        payload: arr
     }
 }
 
-export const addSpentTime = (time) => {
+export const setGeneretedTasks = (tasks) => {
     return {
-        type: 'ADD_SPEND_TIME',
-        payload: time
+        type: 'SET_GENERETED_TASKS',
+        payload: tasks
     }
 }

@@ -1,3 +1,4 @@
+import { calcTime } from "../func"
 
 const initialState = {
     nameTask: '',
@@ -47,13 +48,22 @@ const reducer = (state = initialState, action) => {
                 ...state,
                 nameTask: ''
             };    
-        case 'SET_TASKS':
+        case 'SET_GENERETED_TASKS':
             return {
                 ...state,
                 tasks: action.payload
             };
-        case 'ADD_SPEND_TIME':
-            const newTasks = [...state.tasks, action.payload]
+        case 'SET_TASKS':
+            const newTasks = action.payload.map(task => {
+                return {
+                    day: task.day,
+                    id: task.id,
+                    name: task.name,
+                    start: calcTime(task.start),
+                    end: calcTime(task.end),
+                    spend: calcTime(task.end - task.start),
+                }
+            })
             return {
                 ...state,
                 tasks: newTasks

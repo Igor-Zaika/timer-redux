@@ -3,9 +3,10 @@ import React from "react";
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from "recharts";
 
 import { useSelector, useDispatch } from "react-redux";
-import { setTusks } from "../../actions";
+import { setGeneretedTasks } from "../../actions";
 import { calcTime, getRandom } from '../../func';
 import './taskChart.scss'; 
+
 
 const TasksChart = () => {
 	const { tasks } = useSelector(state => state);
@@ -14,7 +15,7 @@ const TasksChart = () => {
 	const data = []
 
 	for (let i = 0; i < 24; i++) {
-		data.push({ name: i, 'Minutes in this hours': 0 })
+		data.push({ name: i, 'Minutes in this hours': 0})
 	}
 
 	tasks.forEach(task => {
@@ -31,13 +32,13 @@ const TasksChart = () => {
 		} else if (dayOfToday === day) {
 			for (let i = startHours; i <= endHours; i++) {
 				if (startHours === endHours) {
-					data[i]['Minutes in this hours'] += (endMinutes - startMinutes)
+					data[i]['Minutes in this hours'] = (endMinutes - startMinutes)
 				} else if (i === startHours) {
-					data[i]['Minutes in this hours'] = (60 - startMinutes)
+					data[i]['Minutes in this hours'] = (60 - startMinutes);
 				} else if (i === endHours) {
-					data[i]['Minutes in this hours'] = endMinutes
+					data[i]['Minutes in this hours'] += endMinutes;
 				} else {
-					data[i]['Minutes in this hours'] = data[i]['Minutes in this hours'] + 60
+					data[i]['Minutes in this hours'] =  + 60;
 				}
 			}
 		}
@@ -57,8 +58,7 @@ const TasksChart = () => {
 			
 			startPoint += durationOfTime + timeBreaking
 		}
-		localStorage.setItem('tasksLog',JSON.stringify(generatedTasks));
-		dispatch(setTusks(generatedTasks));
+		dispatch(setGeneretedTasks(generatedTasks));
 	}
 
 	return (
@@ -67,14 +67,15 @@ const TasksChart = () => {
 			<ResponsiveContainer height={450} width='100%'>
 				<BarChart
 					data={data}
-					barSize={35}
-				>
-				<XAxis dataKey="name" scale="point" padding={{left: 40, right: 40 }} />
-				<YAxis ticks={[0, 15, 30, 45, 60]} />
-				<Tooltip />
-				<Legend />
-				<CartesianGrid strokeDasharray="3 3" />
-				<Bar dataKey="Minutes in this hours" fill="#8884d8" background={{ fill: "#eee" }} />
+					barSize={35}>
+					<XAxis dataKey="name" scale="point" padding={{left: 40, right: 40 }} />
+					<YAxis ticks={[0, 15, 30, 45, 60]} />
+					<Tooltip />
+					<Legend />
+					<CartesianGrid strokeDasharray="3 3" />
+					<Bar 
+						dataKey="Minutes in this hours" 
+						fill={'#' + Math.floor(Math.random()*16777215).toString(16)}/>
 				</BarChart>
 			</ResponsiveContainer>	
 			<button 

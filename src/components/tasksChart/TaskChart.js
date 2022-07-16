@@ -3,8 +3,8 @@ import React from "react";
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from "recharts";
 
 import { useSelector, useDispatch } from "react-redux";
-import { setGeneretedTasks } from "../../actions";
-import { calcTime, getRandom } from '../../func';
+import { setTusks } from "../../actions";
+import { getRandom } from '../../func';
 import './taskChart.scss'; 
 
 
@@ -50,15 +50,16 @@ const TasksChart = () => {
 		const generatedTasks = [];
 
 		for(let i = 0; i < randomNumberTasks; i++) {
-			const timeBreaking = getRandom(60000,5000000)
+			const timeBreaking = getRandom(60000,5400000)
 			const durationOfTime = getRandom(600000,5400000);
 			const generetedTime = startPoint + durationOfTime
 
-			generatedTasks.push({day: new Date().getDate(), id: uuidv4(), name: 'lorem', start: calcTime(startPoint), end: calcTime(generetedTime), spend: calcTime(durationOfTime)})
+			generatedTasks.push({day: new Date().getDate(), id: uuidv4(), name: 'lorem', start: startPoint, end: generetedTime})
 			
 			startPoint += durationOfTime + timeBreaking
 		}
-		dispatch(setGeneretedTasks(generatedTasks));
+		localStorage.setItem('tasksLog', JSON.stringify(generatedTasks));
+		dispatch(setTusks(generatedTasks));
 	}
 
 	return (
@@ -75,7 +76,7 @@ const TasksChart = () => {
 					<CartesianGrid strokeDasharray="3 3" />
 					<Bar 
 						dataKey="Minutes in this hours" 
-						fill={'#' + Math.floor(Math.random()*16777215).toString(16)}/>
+						fill="#8884d8"/>
 				</BarChart>
 			</ResponsiveContainer>	
 			<button 

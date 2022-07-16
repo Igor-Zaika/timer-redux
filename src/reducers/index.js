@@ -38,7 +38,7 @@ const reducer = (state = initialState, action) => {
                 ...state,
                 modal: false
             }
-        case 'ADD_NEW_TASK':
+        case 'ADD_NAME_TASK':
             return {
                 ...state,
                 nameTask: action.payload
@@ -48,11 +48,6 @@ const reducer = (state = initialState, action) => {
                 ...state,
                 nameTask: ''
             };    
-        case 'SET_GENERETED_TASKS':
-            return {
-                ...state,
-                tasks: action.payload
-            };
         case 'SET_TASKS':
             const newTasks = action.payload.map(task => {
                 return {

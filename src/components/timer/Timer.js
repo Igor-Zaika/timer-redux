@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { v4 as uuidv4 } from 'uuid';
-import { startTimer, stopTimer, addNewTask, onActiveModal, clearName, setTusks } from '../../actions/index';
+import { startTimer, stopTimer, addNameTask, onActiveModal, clearName, setTusks } from '../../actions/index';
 
 import {calcTime} from '../../func'
 import './timer.scss'
@@ -36,30 +36,18 @@ const Timer = () => {
         if(tasksLogTable === null) tasksLogTable = [];
 
         const сreateNewTasksTable = () => {
-            const newData = {
+            const newTask = {
                 day: new Date().getDate(),
                 id: uuidv4(),
                 name: nameTask,
                 start: startTime + 3 * 60 * 60 * 1000,
                 end: endTime + 3 * 60 * 60 * 1000,
-                // spend: calcTime(endTime - startTime),
             }
-            return newData;
+            return newTask;
         }
 
         tasksLogTable.push(сreateNewTasksTable());
         localStorage.setItem("tasksLog", JSON.stringify(tasksLogTable));
-
-        // const setTusks = tasksLogTable.map(task => {
-        //     return {
-        //         day: task.day,
-        //         id: task.id,
-        //         name: task.name,
-        //         start: calcTime(task.start),
-        //         end: calcTime(task.end),
-        //         spend: calcTime(task.end - task.start),
-        //     }
-        // })
         dispatch(setTusks(tasksLogTable));
     }
 
@@ -82,7 +70,7 @@ const Timer = () => {
                 type='text' 
                 placeholder="Name of your tusk" 
                 value={nameTask}
-                onChange={(e) => dispatch(addNewTask(e.target.value))}>
+                onChange={(e) => dispatch(addNameTask(e.target.value))}>
             </input>
             <div className="circle"></div>
             <div className="timer">

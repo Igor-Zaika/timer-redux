@@ -28,9 +28,9 @@ export const offActiveModal = () => {
     }
 }
 
-export const addNewTask = (name) => {
+export const addNameTask = (name) => {
     return {
-        type: 'ADD_NEW_TASK',
+        type: 'ADD_NAME_TASK',
         payload: name
     }
 }

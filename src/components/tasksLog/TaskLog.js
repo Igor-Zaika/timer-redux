@@ -10,7 +10,6 @@ import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import { deepPurple, grey, lightBlue } from '@mui/material/colors';
 import { useDispatch, useSelector} from 'react-redux';
-import { useEffect } from "react";
 
 import {setTusks} from '../../actions/index';
 
@@ -38,24 +37,10 @@ function createData(id, task, timeStart, timeEnd, timeSpend, info, remove) {
     return { id, task, timeStart, timeEnd, timeSpend, info, remove};
 }
 
-
 const TaskLog = () => {
 	const {tasks} = useSelector(state => state);
 	const dispatch = useDispatch();
 	const tasksLogTable = JSON.parse(localStorage.getItem('tasksLog'));
-
-	useEffect(() => {
-		try {
-			if(tasksLogTable.length > 0) {
-				dispatch(setTusks(tasksLogTable))
-			}else {
-				console.log('No tasks found');
-			}
-		}catch(e) {
-			console.log('Failed to parse tasks', e);
-		}
-		// eslint-disable-next-line
-	}, [])
 
 	const onDeleteLog = (id) => {
 		tasksLogTable.forEach((item, i) => {
@@ -67,17 +52,16 @@ const TaskLog = () => {
 		dispatch(setTusks(JSON.parse(localStorage.getItem('tasksLog'))));
 	}
 
-	const countTableLog = () => {
+	const countTasks = () => {
 		let rows = [];
 
 		for(let i = 0; i < tasks.length; i++) {
 			rows.push(createData(tasks[i].id, tasks[i].name, tasks[i].start, tasks[i].end, tasks[i].spend, 'INFO', 'DELETE'));
 		}
-
 		return rows;
 	}
 
-	const rows = countTableLog();
+	const rows = countTasks();
 	
 	return(
 		<>

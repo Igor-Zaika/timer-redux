@@ -15,8 +15,6 @@ function* checkTasks() {
 	try {
 		if(tasksLogTable.length > 0) {
 			yield put(setTusks(tasksLogTable))
-			console.log('has tasks')
-			
 		}else {
 			console.log('No tasks found');
 		}

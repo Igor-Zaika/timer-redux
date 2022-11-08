@@ -1,0 +1,14 @@
+{
+  "files": {
+    "main.css": "/timer-redux/static/css/main.2a5adfa0.css",
+    "main.js": "/timer-redux/static/js/main.be2e697b.js",
+    "static/media/error.gif": "/timer-redux/static/media/error.42292aa12b6bc303ce99.gif",
+    "index.html": "/timer-redux/index.html",
+    "main.2a5adfa0.css.map": "/timer-redux/static/css/main.2a5adfa0.css.map",
+    "main.be2e697b.js.map": "/timer-redux/static/js/main.be2e697b.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.2a5adfa0.css",
+    "static/js/main.be2e697b.js"
+  ]
+}

@@ -1,14 +1,14 @@
 {
   "files": {
     "main.css": "/timer-redux/static/css/main.2a5adfa0.css",
-    "main.js": "/timer-redux/static/js/main.c3c3c72d.js",
+    "main.js": "/timer-redux/static/js/main.bf7dd3cd.js",
     "static/media/error.gif": "/timer-redux/static/media/error.42292aa12b6bc303ce99.gif",
     "index.html": "/timer-redux/index.html",
     "main.2a5adfa0.css.map": "/timer-redux/static/css/main.2a5adfa0.css.map",
-    "main.c3c3c72d.js.map": "/timer-redux/static/js/main.c3c3c72d.js.map"
+    "main.bf7dd3cd.js.map": "/timer-redux/static/js/main.bf7dd3cd.js.map"
   },
   "entrypoints": [
     "static/css/main.2a5adfa0.css",
-    "static/js/main.c3c3c72d.js"
+    "static/js/main.bf7dd3cd.js"
   ]
 }

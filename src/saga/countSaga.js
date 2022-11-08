@@ -1,7 +1,6 @@
 import { put, call, take, fork, cancel, all } from 'redux-saga/effects';
 import {startTimer, stopTimer, increaseTimer, setTusks } from '../actions/index'
 
-
 const delay = (ms) => new Promise(res => setTimeout(res, ms));
 
 function* tick() {

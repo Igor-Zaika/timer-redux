@@ -10,9 +10,9 @@ function App() {
   	return (
 		<Router>
 			<Routes>
-				<Route path="/" element={<MainPage/>}/>
-				<Route path="/:taskId" element={<SingleTaskPage/>}/>
-				<Route path="/chart" element={<TaskChartPage/>}/>
+				<Route path="/timer-redux" element={<MainPage/>}/>
+				<Route path="/timer-redux/:taskId" element={<SingleTaskPage/>}/>
+				<Route path="/timer-redux/chart" element={<TaskChartPage/>}/>
 				<Route path="*" element={<Page404/>}/>
 			</Routes>
 		</Router>

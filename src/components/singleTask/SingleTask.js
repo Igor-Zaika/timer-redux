@@ -29,7 +29,7 @@ const SingleTask = () => {
                         <div className="time-end">Time end:  {singleTask[0].end}</div>
                         <div className="time-spend">Time spend:  {singleTask[0].spend}</div>
                     </div>
-                    <Link to="/" className="single-log__back">Back to main page</Link>
+                    <Link to="/timer-redux" className="single-log__back">Back to main page</Link>
                 </div>
             </>
         )

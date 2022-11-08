@@ -91,7 +91,7 @@ const TaskLog = () => {
 								<StyledTableCell align="center">{row.timeStart}</StyledTableCell>
 								<StyledTableCell align="center">{row.timeEnd}</StyledTableCell>
 								<StyledTableCell align="center">{row.timeSpend}</StyledTableCell>
-								<StyledTableCell align="center" ><Link to={`/${row.id}`}><button>{row.info}</button></Link></StyledTableCell>
+								<StyledTableCell align="center" ><Link to={`/timer-redux/${row.id}`}><button>{row.info}</button></Link></StyledTableCell>
 								<StyledTableCell align="center" onClick={() => onDeleteLog(row.id)}><button>{row.remove}</button></StyledTableCell>
 							</StyledTableRow>
 						))}
